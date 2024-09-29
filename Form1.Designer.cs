@@ -39,8 +39,9 @@
             button4 = new Button();
             button3 = new Button();
             button6 = new Button();
-            textBox2 = new TextBox();
             textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            textBox4 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -80,10 +81,11 @@
             flowLayoutPanel1.Controls.Add(button6);
             flowLayoutPanel1.Controls.Add(textBox3);
             flowLayoutPanel1.Controls.Add(textBox2);
+            flowLayoutPanel1.Controls.Add(textBox4);
             flowLayoutPanel1.Dock = DockStyle.Right;
-            flowLayoutPanel1.Location = new Point(1046, 0);
+            flowLayoutPanel1.Location = new Point(967, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(236, 845);
+            flowLayoutPanel1.Size = new Size(315, 845);
             flowLayoutPanel1.TabIndex = 2;
             // 
             // button2
@@ -166,6 +168,13 @@
             button6.UseVisualStyleBackColor = true;
             button6.Click += button6_Click;
             // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(3, 264);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(100, 23);
+            textBox3.TabIndex = 7;
+            // 
             // textBox2
             // 
             textBox2.Location = new Point(109, 264);
@@ -173,12 +182,13 @@
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 6;
             // 
-            // textBox3
+            // textBox4
             // 
-            textBox3.Location = new Point(3, 264);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 7;
+            textBox4.Location = new Point(3, 293);
+            textBox4.Multiline = true;
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(300, 464);
+            textBox4.TabIndex = 8;
             // 
             // Form1
             // 
@@ -213,5 +223,6 @@
         private Button button6;
         private TextBox textBox2;
         private TextBox textBox3;
+        private TextBox textBox4;
     }
 }

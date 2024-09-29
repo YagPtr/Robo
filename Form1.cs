@@ -16,7 +16,18 @@ namespace Robo
         }
         private bool isMouse = false;
 
-        int[,] array = new int[13, 13];
+        int[,] arrayOfWalls = new int[13, 13];
+        void outArray()
+        {
+            textBox4.Text = "";
+            for (int i = 0; i < 13; i++) {
+                for (int j = 0; j < 13; j++)
+                {
+                    textBox4.Text += arrayOfWalls[i, j].ToString()+" ";
+                }
+                textBox4.Text += "\r\n";
+            }
+        }
 
         private class ArrayPoints
         {
@@ -217,8 +228,15 @@ namespace Robo
                 case 0:
                     for (int i = 0; i < 70; i++)
                     {
+
+                        if (isWall(robotX, robotY - i)) { 
+                            textBox1.Text = "I see black1";
+                            if (check(arrayOfWalls[coordY, coordX], 2))
+                            {
+                                arrayOfWalls[coordY, coordX] += 2; break;
+                            }
+                        }
                         
-                        if (isWall(robotX, robotY - i)) { textBox1.Text = "I see black1"; }
                             
                        
 
@@ -228,7 +246,13 @@ namespace Robo
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX, robotY + i)) { textBox1.Text = "I see black3"; }
+                        if (isWall(robotX, robotY + i)) {
+                            textBox1.Text = "I see black3";
+                            if (check(arrayOfWalls[coordY, coordX], 4))
+                            {
+                                arrayOfWalls[coordY, coordX] += 8; break;
+                            }
+                        }
 
                     }
                     break;
@@ -236,28 +260,56 @@ namespace Robo
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX-i, robotY)) { textBox1.Text = "I see black2"; }
+                        if (isWall(robotX-i, robotY)) { 
+                            textBox1.Text = "I see black2";
+                            if (check(arrayOfWalls[coordY, coordX], 1))
+                            {
+                                arrayOfWalls[coordY, coordX] += 1; break;
+                            }
+                        }
 
                     }
                     break;
                 case 270:
+                    
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX + i, robotY)) { textBox1.Text = "I see black4"; }
+                        if (isWall(robotX + i, robotY)) { 
+                            textBox1.Text = "I see black4";
+                            if (check(arrayOfWalls[coordY, coordX], 3))
+                            {
+                                arrayOfWalls[coordY, coordX] += 4; break;
+                            }
+                        }
 
                     }
                     break;
             }
+            outArray();
         }
-
+        bool check(int checkN, int FoundWall)
+        {
+            switch (FoundWall)
+            {
+                case 1:
+                    if (checkN % 2 == 1)  return false;  break;
+                case 2:
+                    if (checkN % 4 /2 == 1) return false; break;
+                case 3:
+                    if (checkN % 8 /4 == 1) return false; break;    
+                case 4:
+                    if (checkN / 8==1) return false; break; 
+            }
+            return true;
+        }
         void LabGen()
         {
             //13(0-12) up  //13(0-12) side
-            graphics.DrawRectangle(pen, 20, 20,960,1000);
+            graphics.DrawRectangle(pen, 50, 50,960,960);
             for (int i = 0; i < 12; i++)
             {
-                graphics.DrawLine(pen, 135+i*70, 20, 135+i*70, 800);
+                graphics.DrawLine(pen, 135+i*70, 50, 135+i*70, 800);
             }
             
             pictureBox1.Image = map;
