@@ -20,10 +20,11 @@ namespace Robo
         void outArray()
         {
             textBox4.Text = "";
-            for (int i = 0; i < 13; i++) {
+            for (int i = 0; i < 13; i++)
+            {
                 for (int j = 0; j < 13; j++)
                 {
-                    textBox4.Text += arrayOfWalls[i, j].ToString()+" ";
+                    textBox4.Text += arrayOfWalls[i, j].ToString() + " ";
                 }
                 textBox4.Text += "\r\n";
             }
@@ -152,10 +153,13 @@ namespace Robo
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+            roboMovementCycle();
+        }
+        void roboMovementCycle() {
             graphics.FillRectangle(brush, robotX - 25, robotY - 25, 50, 50);
             move();
             DrawRobo();
-
         }
         void move()
         {
@@ -168,7 +172,7 @@ namespace Robo
                     coordY -= 1;
                     if (coordY < 0) { coordY = 0; robotY += 70; }
                     textBox2.Text = coordX.ToString();
-                    textBox3.Text= coordY.ToString();
+                    textBox3.Text = coordY.ToString();
                     break;
                 case 180:
                     robotY += 70;
@@ -193,7 +197,17 @@ namespace Robo
                     break;
             }
         }
+
         private void button5_Click(object sender, EventArgs e)
+        {
+            rotateNeg();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            rotatePos();
+        }
+        void rotateNeg()
         {
             rotation -= 90;
             if (rotation < 0) rotation = 270;
@@ -201,8 +215,7 @@ namespace Robo
             graphics.FillRectangle(brush, robotX - 25, robotY - 25, 50, 50);
             DrawRobo();
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        void rotatePos()
         {
             rotation += 90;
             if (rotation == 360) rotation = 0;
@@ -211,7 +224,7 @@ namespace Robo
             DrawRobo();
         }
 
-        bool isWall(int x,int y)
+        bool isWall(int x, int y)
         {
             Color xd = map.GetPixel(x, y);
             if ((xd.R == 0) && (xd.G == 0) && (xd.B == 0))
@@ -222,23 +235,28 @@ namespace Robo
 
         private void button6_Click(object sender, EventArgs e)
         {
-            
+            facingWall();
+
+        }
+        void facingWall()
+        {
             switch (rotation)
             {
                 case 0:
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX, robotY - i)) { 
+                        if (isWall(robotX, robotY - i))
+                        {
                             textBox1.Text = "I see black1";
                             if (check(arrayOfWalls[coordY, coordX], 2))
                             {
                                 arrayOfWalls[coordY, coordX] += 2; break;
                             }
                         }
-                        
-                            
-                       
+
+
+
 
                     }
                     break;
@@ -246,7 +264,8 @@ namespace Robo
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX, robotY + i)) {
+                        if (isWall(robotX, robotY + i))
+                        {
                             textBox1.Text = "I see black3";
                             if (check(arrayOfWalls[coordY, coordX], 4))
                             {
@@ -260,7 +279,8 @@ namespace Robo
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX-i, robotY)) { 
+                        if (isWall(robotX - i, robotY))
+                        {
                             textBox1.Text = "I see black2";
                             if (check(arrayOfWalls[coordY, coordX], 1))
                             {
@@ -271,11 +291,12 @@ namespace Robo
                     }
                     break;
                 case 270:
-                    
+
                     for (int i = 0; i < 70; i++)
                     {
 
-                        if (isWall(robotX + i, robotY)) { 
+                        if (isWall(robotX + i, robotY))
+                        {
                             textBox1.Text = "I see black4";
                             if (check(arrayOfWalls[coordY, coordX], 3))
                             {
@@ -293,26 +314,65 @@ namespace Robo
             switch (FoundWall)
             {
                 case 1:
-                    if (checkN % 2 == 1)  return false;  break;
+                    if (checkN % 2 == 1) return false; break;
                 case 2:
-                    if (checkN % 4 /2 == 1) return false; break;
+                    if (checkN % 4 / 2 == 1) return false; break;
                 case 3:
-                    if (checkN % 8 /4 == 1) return false; break;    
+                    if (checkN % 8 / 4 == 1) return false; break;
                 case 4:
-                    if (checkN / 8==1) return false; break; 
+                    if (checkN / 8 == 1) return false; break;
             }
             return true;
         }
         void LabGen()
         {
             //13(0-12) up  //13(0-12) side
-            graphics.DrawRectangle(pen, 50, 50,960,960);
+            graphics.DrawRectangle(pen, 50, 50, 960, 960);
             for (int i = 0; i < 12; i++)
             {
-                graphics.DrawLine(pen, 135+i*70, 50, 135+i*70, 800);
+                graphics.DrawLine(pen, 135 + i * 70, 50, 135 + i * 70, 800);
             }
-            
+
             pictureBox1.Image = map;
+        }
+        int count = 0;
+        void roboMovement()
+        {
+            for (int i = 0; i <= 12; i++)
+            {
+
+                for (int j = 0; j <= 12; j++)
+                {
+                    rotateNeg();
+                    facingWall();
+                    rotateNeg();
+                    facingWall();
+                    rotateNeg();
+                    facingWall();
+                    rotateNeg();
+                    facingWall();
+                    roboMovementCycle();
+                }
+                if (count == 0) {
+                    rotateNeg();
+                    roboMovementCycle();
+                    rotateNeg();
+                    count = 1;
+                }
+                else
+                {
+                    rotatePos();
+                    roboMovementCycle();
+                    rotatePos();
+                    count = 0;
+                }
+                
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            roboMovement();
         }
     }
 }

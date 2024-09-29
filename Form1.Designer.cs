@@ -42,6 +42,7 @@
             textBox3 = new TextBox();
             textBox2 = new TextBox();
             textBox4 = new TextBox();
+            button7 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
@@ -77,6 +78,7 @@
             flowLayoutPanel1.Controls.Add(button1);
             flowLayoutPanel1.Controls.Add(button2);
             flowLayoutPanel1.Controls.Add(flowLayoutPanel2);
+            flowLayoutPanel1.Controls.Add(button7);
             flowLayoutPanel1.Controls.Add(panel1);
             flowLayoutPanel1.Controls.Add(button6);
             flowLayoutPanel1.Controls.Add(textBox3);
@@ -190,6 +192,16 @@
             textBox4.Size = new Size(300, 464);
             textBox4.TabIndex = 8;
             // 
+            // button7
+            // 
+            button7.Location = new Point(163, 56);
+            button7.Name = "button7";
+            button7.Size = new Size(75, 23);
+            button7.TabIndex = 9;
+            button7.Text = "button7";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -224,5 +236,6 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
+        private Button button7;
     }
 }
