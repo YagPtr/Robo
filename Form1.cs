@@ -139,16 +139,16 @@ namespace Robo
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            graphics.FillRectangle(brush, robotX - 25, robotY - 25, 100, 100);
-            DrawRobo();
+          //  graphics.FillRectangle(brush, robotX - 25, robotY - 25, 100, 100);
+          //  DrawRobo();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Pen pen2 = new Pen(Color.White, 3f);
-            graphics.FillRectangle(brush, 10, 10, 100, 100);
-            graphics.RotateTransform(30.0F);
-            pictureBox1.Image = map;
+          //  Pen pen2 = new Pen(Color.White, 3f);
+          //  graphics.FillRectangle(brush, 10, 10, 100, 100);
+           // graphics.RotateTransform(30.0F);
+            //pictureBox1.Image = map;
         }
 
         private void button3_Click(object sender, EventArgs e)
